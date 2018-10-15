@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from custom_user.views import register,loginv,loggedon,logoutc
+from custom_user.views import register,loginv,logoutc
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -25,7 +25,7 @@ urlpatterns = [
     path('register',register,name='register'),
     path('login',loginv,name='login'),
     path('logout', logoutc, name='logout'),
-    path('loggedin',loggedon,name='loggedon'),
+    # path('loggedin',loggedon,name='loggedon'),
     path('', include("myapp.urls")),
 ]
 

@@ -35,21 +35,21 @@ def loginv(request):
         if user is not None:
             login(request, user)
             request.session['user'] = user
-            return redirect('loggedon')
+            return redirect('index')
         else:
             # Return an 'invalid login' error message.
             print("Error lol")
     return render(request, "custom_user/login.html", context)
 
-def loggedon(request):
-    form=request.session['user']
-    username=User.objects.get(email=form)
-    print(username.full_name)
-    print(form)
-    context={
-        'form': username
-    }
-    return render(request,'custom_user/loggedin.html',context)
+# def loggedon(request):
+#     form=request.session['user']
+#     username=User.objects.get(email=form)
+#     print(username.full_name)
+#     print(form)
+#     context={
+#         'form': username
+#     }
+#     return render(request,'custom_user/loggedin.html',context)
 
 def logoutc(request):
     # logout(request)

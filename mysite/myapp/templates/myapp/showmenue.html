@@ -1,17 +1,128 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <form action="showmenue" method="post" enctype="multipart/form-data">
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+
+<nav class="navbar sticky-top navbar-inverse">
+    <div class="spacenav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand " style="color:green">JUFoodie</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="showmenue">Menue</a></li>
+                <!--<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>-->
+                <!--<ul class="dropdown-menu">-->
+                <!--<li><a href="#">Page 1-1</a></li>-->
+                <!--<li><a href="#">Page 1-2</a></li>-->
+                <!--<li><a href="#">Page 1-3</a></li>-->
+                <!--</ul>-->
+                <!--</li>-->
+                <li><a href="#">Page 2</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+
+                {% if user.is_authenticated %}
+                <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+                        class="glyphicon glyphicon-user"></span> {{ form.full_name }} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Page 1-1</a></li>
+                        <li><a href="#">Page 1-2</a></li>
+                        <li><a href="#">Page 1-3</a></li>
+                    </ul>
+                </li>
+
+                {% else %}
+
+                <li><a href="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
+<div class="container">
+    <div class="space">
+
+       {% load static %}
+       <center>
         {% csrf_token %}
-        {{form.as_p}}
+         {{search}}
+
+       </center>
+    </div>
+    <!--<center>-->
+        <!--{% csrf_token %}-->
+        <!--{{search}}-->
+
+    <!--</center>-->
+    <!--<div class="background" style = "background-image: url('{% static "image/background.jpg"%}'); background-repeat:no-repeat; width:100%;height:100%;opacity:.5">-->
+    {% for item in form %}
+    <div class="boxleft">
+
+        {% if item.image %}
+        <center><img src="{{ item.image.url }}" alt="lol1" style="height:200px;width:220px;"/></center>
+
+        {% endif %}
+        <center>name: {{item.foodname}}</center>
+        <center>price: {{item.foodname}}</center>
+        <center>
+            <form action="ordermenue/{{item.id}}/" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Order"/>
+
+            </form>
+        </center>
+
+        <!--{{item.fooditem}}
+        {{item.foodname}}
+        {{item.foodprice}}-->
+    </div>
+    {% endfor %}
 
 
-        <input type="submit" value="AddItem"/>
+    <!--</div>-->
+    <!--<center><h1>Hello We provide food :P </h1></center>-->
+    <!--<div id="myCarousel" class="carousel slide" data-ride="carousel">-->
+    <!--&lt;!&ndash; Indicators &ndash;&gt;-->
+    <!--<ol class="carousel-indicators">-->
+    <!--<li data-target="#myCarousel" data-slide-to="0" class="active"></li>-->
+    <!--<li data-target="#myCarousel" data-slide-to="1"></li>-->
+    <!--<li data-target="#myCarousel" data-slide-to="2"></li>-->
+    <!--</ol>-->
+    <!--{% load static %}-->
+    <!--&lt;!&ndash; Wrapper for slides &ndash;&gt;-->
+    <!--<div class="carousel-inner">-->
+    <!--<div class="item active">-->
+    <!--<center><img src="{% static 'image/1.jpg' %}" alt="food1" style="width:100%;height:500px;"></center>-->
 
-    </form>
-</body>
-</html>
+    <!--</div>-->
+
+    <!--<div class="item">-->
+    <!--<center><img src="{% static 'image/2.jpg' %}" alt="food2" style="width:100%;height:500px;"></center>-->
+
+    <!--</div>-->
+
+    <!--<div class="item">-->
+    <!--<center><img src="{% static 'image/3.jpg' %}" alt="food3" style="width:100%;height:500px;"></center>-->
+
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--&lt;!&ndash; Left and right controls &ndash;&gt;-->
+    <!--<a class="left carousel-control" href="#myCarousel" data-slide="prev">-->
+    <!--<span class="glyphicon glyphicon-chevron-left"></span>-->
+    <!--<span class="sr-only">Previous</span>-->
+    <!--</a>-->
+    <!--<a class="right carousel-control" href="#myCarousel" data-slide="next">-->
+    <!--<span class="glyphicon glyphicon-chevron-right"></span>-->
+    <!--<span class="sr-only">Next</span>-->
+    <!--</a>-->
+    <!--</div>-->
+</div>
+
+{% endblock %}

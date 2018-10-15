@@ -1,0 +1,17 @@
+ .spacenav{
+         margin-left: 4%;
+         margin-right:4%;
+      }
+/*.background {
+   opacity:.5;
+   background-repeat:no-repeat;
+   background-size:100%;
+}*/
+.boxleft  {
+    margin-top:5px;
+    margin-left:5px;
+    height:250px;
+    width:250px;
+    display:inline-block;
+    border:2px solid #000;
+}
